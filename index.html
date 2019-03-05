@@ -75,6 +75,143 @@
       <div id="main" class="wrapper">
         <div id="primary" class="site-content"><div id="content" role="main">
   
+    <article id="pages-JS基础知识梳理" class="pages-JS基础知识梳理 post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title">
+      <a class="article-title" href="/2019/03/04/JS基础知识梳理/">JS基础知识梳理</a>
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="git@github.com:fzg2lj/fzg2lj.github.io.git/2019/03/04/JS基础知识梳理/" data-id="cjsvm5rmc00009cuo2lqpy556" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <ul>
+<li>变量类型<ul>
+<li>JS数据类型分类</li>
+<li>值类型和引用类型</li>
+</ul>
+</li>
+<li>原型和原型链<ul>
+<li>原型和原型链的定义</li>
+<li>继承的写法</li>
+</ul>
+</li>
+<li>作用域和闭包<ul>
+<li>执行上下文</li>
+<li>this指向</li>
+<li>闭包是什么</li>
+</ul>
+</li>
+<li>异步<ul>
+<li>同步和异步</li>
+</ul>
+</li>
+<li>ES6/7新标准<ul>
+<li>箭头函数</li>
+</ul>
+</li>
+</ul>
+<h3 id="变量类型"><a href="#变量类型" class="headerlink" title="变量类型"></a>变量类型</h3><hr>
+<p>js是个弱类型脚本语言，意味着它定义变量时，不需要定义变量类型就可以用，（我在学Java的时候，定义一个变量需要加类型，比如定义数字类型 int num =8， 而js直接就可以 var num =8）</p>
+<p>ECMAScript 中定义了 6 种原始类型：</p>
+<ul>
+<li><p>Boolean</p>
+</li>
+<li><p>String</p>
+</li>
+<li><p>Number</p>
+</li>
+<li><p>Null</p>
+</li>
+<li><p>Undefined</p>
+</li>
+<li><p>Symbol（ES6 新定义）</p>
+<p>！！原始类型不包括Object</p>
+<h4 id="typeof"><a href="#typeof" class="headerlink" title="typeof"></a>typeof</h4></li>
+</ul>
+<p>typeof null<br>“object”</p>
+<p>typeof [1,2]<br>“object”</p>
+<p>typeof Symbol()<br>“symbol”</p>
+<p>typeof undefined<br>“undefined”</p>
+<p>typeof String<br>“function”</p>
+<p>typeof Number<br>“function”</p>
+<p>typeof Boolean<br>“function”</p>
+<h4 id="instanceof"><a href="#instanceof" class="headerlink" title="instanceof"></a>instanceof</h4><p>instanceof 判断实例属于哪个构造函数</p>
+<h3 id="值类型和引用类型"><a href="#值类型和引用类型" class="headerlink" title="值类型和引用类型"></a>值类型和引用类型</h3><p><code>var a =2;</code> </p>
+<p>a就是值类型</p>
+<p><code>var b={x:2}</code></p>
+<p>b就是引用类型</p>
+<p>如果<code>var c =b</code>，那么c也是个引用类型，并且与b指向的是同一个内存地址，修改b的时候c也会跟着修改</p>
+<p><code>Number</code>类型的<code>a</code>是按值传递的，而<code>Object</code>类型的<code>b</code>是按共享传递的。</p>
+<p>JS 中这种设计的原因是：按值传递的类型，复制一份存入栈内存，这类类型一般不占用太多内存，而且按值传递保证了其访问速度。按共享传递的类型，是复制其引用，而不是整个复制其值（C 语言中的指针），保证过大的对象等不会因为不停复制内容而造成内存的浪费。</p>
+<h3 id="原型和原型链"><a href="#原型和原型链" class="headerlink" title="原型和原型链"></a>原型和原型链</h3><p><strong>所有的引用类型（数组、对象、函数），都具有对象特性，即可自由扩展属性</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var acj = &#123;&#125;;</span><br><span class="line">obj.a = 100;</span><br><span class="line"></span><br><span class="line">var arr = [];</span><br><span class="line">arr.a = 100;</span><br><span class="line"></span><br><span class="line">function fn()&#123;&#125;</span><br><span class="line">fn.a = 100;</span><br></pre></td></tr></table></figure>
+<p><img src="C:\Users\旧城爱\Desktop\打印对象.PNG" alt></p>
+<p>[^左边是谷歌，右边是火狐]: </p>
+<p><strong>所有的引用类型（数组、对象、函数），都有一个<code>__proto__</code>属性，属性值是一个普通的对象</strong></p>
+<p><img src="C:\Users\旧城爱\Desktop\_proto_.PNG" alt></p>
+<p>[^左边是谷歌，右边是火狐]: </p>
+<p><strong>所有的函数，都有一个<code>prototype</code>属性，属性值也是一个普通的对象</strong></p>
+<p><img src="C:\Users\旧城爱\Desktop\prototype.PNG" alt></p>
+<p><strong>所有的引用类型（数组、对象、函数），<code>__proto__</code>属性值指向它的构造函数的<code>prototype</code>属性值</strong></p>
+<p><img src="C:\Users\旧城爱\Desktop\属性指向.PNG" alt></p>
+<p><strong>当试图得到一个对象的某个属性时，如果这个对象本身没有这个属性，那么会去它的<code>__proto__</code>（即它的构造函数的<code>prototype</code>）中寻找</strong></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>Object和Function都作为JS的自带函数，凡是通过new Function创建的对象都是函数对象，<strong>函数对象可以创建普通对象</strong>，其他都是普通对象（通常通过Object创建），Object和Function都既是函数也是对象。<strong>每一个函数对象都有一个prototype属性，但是普通对象是没有的</strong>，每个对象都有一个名为<em>proto</em>的内部属性，指向它所对应的构造函数的原型对象，原型链基于<em>proto</em>;</p>
+<p><img src="C:\Users\旧城爱\Desktop\instanceof.PNG" alt></p>
+<p>上面所说的函数对象可以创建普通对象，而普通对象 有<strong>proto</strong>这个属性，并且指向它所对应的构造函数的原型对象</p>
+<p><img src="C:\Users\旧城爱\Desktop\捕获.PNG" alt></p>
+<p>个人认为，原型就是一个属性，原型对象就是在这个属性里的对象集合，我们可以用原型添加新的方法，也就是添加到原型对象中，</p>
+<p><strong>原型链</strong>就是在js在找方法的时候找不到，就会去上一层找，上面图显示了，<code>b.__proto__</code>就是<code>fn.prototype</code>，如果方法没有在b.<strong>proto</strong>里找到，那就到b.<strong>proto</strong>.proto 也就是fn.prototype.proto, 而fn.prototype.proto等于的 是Object.prototype,那就会在这里找，这里也找不到最后就返回null,因为Object.prototype.<strong>proto</strong>是null, 整个原型链就是通过<strong>proto</strong>连接的，</p>
+<p>而原型链中的`this就是谁调用我，我就指向谁</p>
+<h3 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h3><p>闭包简单理解就是：<strong>能够读取其他函数内部变量的函数</strong>。</p>
+<p>优点就是</p>
+<p>1.保护函数内的变量安全,加强了封装性<br>2.在内存中维持一个变量(用的太多就变成了缺点，占内存) ，延缓数据</p>
+<h3 id="同步和异步"><a href="#同步和异步" class="headerlink" title="同步和异步"></a>同步和异步</h3><p>同步和异步跟js运行机制有关系，因为它是单线程，就好比排队上一个厕所，前面有人裤子解不开，那后面排队上厕所的人不能干等着他呀，就让后面的人先上，裤子解不开的那个等会儿上，，这就叫异步，而同步就是解不开裤子那个人上不完后面的谁也别上</p>
+<p>代码比较下</p>
+<p><strong>异步</strong></p>
+<p><code>console.log(100)
+setTimeout(function () {
+    console.log(200)//解不开裤子的人
+}, 1000) 
+console.log(300)</code>//排在他后面的人</p>
+<p><strong>同步</strong></p>
+<p>console.log(100)<br>alert(200)  // 不点一下弹出来的200，后面的300就不会打印出来，阻挡了后面的运行<br>console.log(300)</p>
+<h2 id="ES6-7"><a href="#ES6-7" class="headerlink" title="ES6/7"></a>ES6/7</h2><p>我对es6和7认知还比较浅薄，虽然看了些阮一峰以及廖雪峰的文章，但有些方法还是没有实际应用</p>
+<p><a href="http://es6.ruanyifeng.com/" target="_blank" rel="noopener">http://es6.ruanyifeng.com/</a></p>
+<h3 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h3><p>箭头函数是 ES6 中新的函数定义形式，<code>function name(arg1, arg2) {...}</code>可以使用<code>(arg1, arg2) =&gt; {...}</code>来定义</p>
+<p>箭头函数有两个优点，第一个就是代码量少了，第二个就是this的指向不会指向全局变量。</p>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2019/03/04/JS基础知识梳理/">
+    <time datetime="2019-03-04T01:44:15.297Z" class="entry-date">
+        2019-03-04
+    </time>
+</a>
+    
+    
+    </footer>
+</article>
+
+
+
+
+
+
+  
     <article id="post-CSS知识点梳理" class="post-CSS知识点梳理 post type-post status-publish format-standard hentry">
     <!---->
 
@@ -90,7 +227,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="git@github.com:fzg2lj/fzg2lj.github.io.git/2019/03/03/CSS知识点梳理/" data-id="cjssjeyst000234uov4i5puf8" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="git@github.com:fzg2lj/fzg2lj.github.io.git/2019/03/03/CSS知识点梳理/" data-id="cjsvm5rq400049cuo4c10onxy" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -249,7 +386,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="git@github.com:fzg2lj/fzg2lj.github.io.git/2019/02/28/vue项目开发流程/" data-id="cjssjeysf000034uoafflv3sm" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="git@github.com:fzg2lj/fzg2lj.github.io.git/2019/02/28/vue项目开发流程/" data-id="cjsvm5rpa00019cuo10cdlun4" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -328,7 +465,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="git@github.com:fzg2lj/fzg2lj.github.io.git/2019/01/07/前端基础知识梳理/" data-id="cjssjeysu000334uognt2stw1" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="git@github.com:fzg2lj/fzg2lj.github.io.git/2019/01/07/前端基础知识梳理/" data-id="cjsvm5rq300039cuo7zgzoqbt" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -530,6 +667,10 @@ textSpan.addEventListener(&quot;click&quot;, function(e){
       <ul>
         
           <li>
+            <a href="/2019/03/04/JS基础知识梳理/">JS基础知识梳理</a>
+          </li>
+        
+          <li>
             <a href="/2019/03/03/CSS知识点梳理/">CSS知识点梳理</a>
           </li>
         
@@ -550,7 +691,7 @@ textSpan.addEventListener(&quot;click&quot;, function(e){
   <aside class="widget">
     <h3 class="widget-title">Archives</h3>
     <div class="widget-content">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </aside>
 
